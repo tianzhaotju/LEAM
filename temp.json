@@ -1,0 +1,42 @@
+[
+{
+    "filename":"Branch.java",
+    "classes":[
+        {
+            "fields":[{"type":"content", "name":"ON_TRUE"}, {"type":"content", "name":"ON_FALSE"}, {"type":"content", "name":"ON_EX"}, {"type":"content", "name":"UNCOND"}], "methods":[]
+}
+    ]
+},
+{
+    "filename":"GregorianCalendar.java",
+    "classes":[
+        {
+            "methods":[{"name":"GregorianCalendar", "params":[{"type":"TimeZone"}, {"type":"Locale"}]}]   
+        }
+    ]
+},
+{
+    "filename":"Calendar.java",
+    "classes":[
+        {
+            "methods":[{"name":"set", "params":[{"type":"int"}, {"type":"int"}, {"type":"int"}, {"type":"int"}, {"type":"int"}, {"type":"int"}]}, {"name":"get", "params":[{"type":"int"}]}, {"name":"getTime", "params":[], "type":null}, {"name":"setTime", "params":[{"type":"Date"}]}]
+        }
+    ]
+},
+{
+    "filename":"EndTag.java",
+    "classes":[
+        {
+            "methods":[{"name":"normalName", "params":[], "type":"String"}, {"name":"name", "params":[], "type":"String"}]   
+        }
+    ]
+},
+{
+    "filename":"String.java",
+    "classes":[
+        {
+            "methods":[{"name":"get", "params":[{"type":"String"}], "type":"String"}, {"name":"getIgnoreCase", "params":[{"type":"String"}], "type":"String"}]   
+        }
+    ]
+}
+]
