@@ -30,7 +30,7 @@ Please run `CUDA_VISIBLE_DEVICES=0,1 python3 testDefect4jV1Fixed.py Chart-1` in 
 
 
 
-#### 2. Ability of representing real faults interms of adequate test suites. (a) shows the result when using all the constructed mutation faults; (b)/(c) shows the result under controlling for the number of mutation faults when considering/ignoring DeepMutation (DM).
+#### 2. Ability of representing real faults interms of adequate test suites. (a) shows the result when using all the constructed mutation faults; (b)/(c) shows the result under controlling for the number of mutation faults when considering/ignoring DeepMutation (DM)
 <img src="./pictures/realfault.png" alt="drawing" width="500">
 
 --- ---
@@ -38,7 +38,7 @@ Please run `CUDA_VISIBLE_DEVICES=0,1 python3 testDefect4jV1Fixed.py Chart-1` in 
 
 
 
-#### 3. Ability of representing mutation faults constructed by other mutation techniques. (a) shows the result when using all the constructed mutation faults; (b)/(c) shows the result under controlling for the number of mutation faults when considering/ignoring DeepMutation (DM).
+#### 3. Ability of representing mutation faults constructed by other mutation techniques. (a) shows the result when using all the constructed mutation faults; (b)/(c) shows the result under controlling for the number of mutation faults when considering/ignoring DeepMutation (DM)
 <img src="./pictures/mutationfault.png" alt="drawing" width="800">
 
 --- ---
@@ -56,6 +56,7 @@ Please run `CUDA_VISIBLE_DEVICES=0,1 python3 testDefect4jV1Fixed.py Chart-1` in 
 
 #### 5. Effectiveness comparison in mutation-based TCP (Chart, Closure, Lang, Math, Time)
 <img src="./pictures/tcp.png" alt="drawing" width="800">
+
 --- ---
 
 
@@ -63,6 +64,7 @@ Please run `CUDA_VISIBLE_DEVICES=0,1 python3 testDefect4jV1Fixed.py Chart-1` in 
 
 #### 6. Effectiveness comparison in mutation-based FL (Chart, Closure, Lang, Math, Time)
 <img src="./pictures/fl.png" alt="drawing" width="800">
+
 --- ---
 
 
@@ -86,6 +88,7 @@ Please run `CUDA_VISIBLE_DEVICES=0,1 python3 testDefect4jV1Fixed.py Chart-1` in 
 
 #### 9.  The influence of the number of mutation faults, which can be controlled by beam size, on mutation-based TCP (Chart)
 <img src="./pictures/beamsizetcp.png" alt="drawing" width="800">
+
 --- ---
 
 
@@ -95,4 +98,3 @@ Please run `CUDA_VISIBLE_DEVICES=0,1 python3 testDefect4jV1Fixed.py Chart-1` in 
 <img src="./pictures/beamsizefl.png" alt="drawing" width="800">
 
 --- ---
-
