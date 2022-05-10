@@ -56,6 +56,7 @@ Please run `CUDA_VISIBLE_DEVICES=0,1 python3 testDefect4jV1Fixed.py Chart-1` in 
 
 #### (5) Effectiveness comparison in mutation-based TCP when considering/ignoring Closure
 <img src="./pictures/tcp_1.png" alt="drawing" width="800">
+
 <img src="./pictures/tcp_2.png" alt="drawing" width="800">
 
 --- ---
@@ -65,6 +66,7 @@ Please run `CUDA_VISIBLE_DEVICES=0,1 python3 testDefect4jV1Fixed.py Chart-1` in 
 
 #### (6) Effectiveness comparison in mutation-based FL when considering/ignoring Closure
 <img src="./pictures/fl_1.png" alt="drawing" width="800">
+
 <img src="./pictures/fl_2.png" alt="drawing" width="800">
 
 --- ---
