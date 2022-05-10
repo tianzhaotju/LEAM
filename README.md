@@ -54,23 +54,25 @@ Please run `CUDA_VISIBLE_DEVICES=0,1 python3 testDefect4jV1Fixed.py Chart-1` in 
 
 
 
-#### (5) Effectiveness comparison in mutation-based TCP
-<img src="./pictures/tcp.png" alt="drawing" width="800">
+#### (5) Effectiveness comparison in mutation-based TCP when considering/ignoring Closure
+<img src="./pictures/tcp_1.png" alt="drawing" width="800">
+<img src="./pictures/tcp_2.png" alt="drawing" width="800">
 
 --- ---
 
 
 
 
-#### (6) Effectiveness comparison in mutation-based FL
-<img src="./pictures/fl.png" alt="drawing" width="800">
+#### (6) Effectiveness comparison in mutation-based FL when considering/ignoring Closure
+<img src="./pictures/fl_1.png" alt="drawing" width="800">
+<img src="./pictures/fl_2.png" alt="drawing" width="800">
 
 --- ---
 
 
 
 
-#### (7) Ablation test for LEAM on mutation-based TCP
+#### (7) Ablation test for LEAM on mutation-based TCP (Chart)
 <img src="./pictures/ablationtcp.png" alt="drawing" width="600">
 
 --- ---
@@ -78,7 +80,7 @@ Please run `CUDA_VISIBLE_DEVICES=0,1 python3 testDefect4jV1Fixed.py Chart-1` in 
 
 
 
-#### (8) Ablation test for LEAM on mutation-based FL
+#### (8) Ablation test for LEAM on mutation-based FL (Chart)
 <img src="./pictures/ablationfl.png" alt="drawing" width="600">
 
 --- ---
@@ -86,7 +88,7 @@ Please run `CUDA_VISIBLE_DEVICES=0,1 python3 testDefect4jV1Fixed.py Chart-1` in 
 
 
 
-#### (9) The influence of the number of mutation faults, which can be controlled by beam size, on mutation-based TCP
+#### (9) The influence of the number of mutation faults, which can be controlled by beam size, on mutation-based TCP (Chart, Lang, Math, Time)
 <img src="./pictures/beamsizetcp.png" alt="drawing" width="800">
 
 --- ---
@@ -94,7 +96,7 @@ Please run `CUDA_VISIBLE_DEVICES=0,1 python3 testDefect4jV1Fixed.py Chart-1` in 
 
 
 
-#### (10) The influence of the number of mutation faults, which can be controlled by beam size, on mutation-based FL
+#### (10) The influence of the number of mutation faults, which can be controlled by beam size, on mutation-based FL (Chart, Lang, Math, Time)
 <img src="./pictures/beamsizefl.png" alt="drawing" width="800">
 
 --- ---
