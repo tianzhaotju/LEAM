@@ -54,7 +54,7 @@ Please run `CUDA_VISIBLE_DEVICES=0,1 python3 testDefect4jV1Fixed.py Chart-1` in 
 
 
 
-#### (5) Effectiveness comparison in mutation-based TCP when ignoring/considering Closure (detailed experimental data can be found in the `experiment/tcp.xlsx` folder)
+#### (5) Effectiveness comparison in mutation-based TCP when ignoring/considering Closure (detailed experimental data can be found in the `experiment/tcp.csv` folder)
 <center> <div><b>(a) Ignoring Closure</b><div/>
 <img src="./pictures/tcp_1.png" alt="drawing" width="800">
 <center/>
@@ -69,7 +69,7 @@ Please run `CUDA_VISIBLE_DEVICES=0,1 python3 testDefect4jV1Fixed.py Chart-1` in 
 
 
 
-#### (6) Effectiveness comparison in mutation-based FL when ignoring/considering Closure  (detailed experimental data can be found in the `experiment/fl.xlsx` folder)
+#### (6) Effectiveness comparison in mutation-based FL when ignoring/considering Closure  (detailed experimental data can be found in the `experiment/fl.csv` folder)
 <center> <div><b>(a) Ignoring Closure<b/><div/>
 <img src="./pictures/fl_1.png" alt="drawing" width="800">
 <center/>
