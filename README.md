@@ -1,6 +1,12 @@
 # LEAM
 
+LEAM adapts the syntax-guided encoder-decoder architecture by extending a set of grammar rules specific to our mutation task, to guarantee syntactic correctness of constructed mutation faults. It predicts the statements to be mutated under the context of the targeted method to reduce search space, and then predicts grammar rules for mutation fault construction based on both semantic and structural features in AST.
+
+See [Zhao Tian](https://tianzhaotju.github.io/), [Junjie Chen](https://sites.google.com/site/junjiechen08/), et al. "[Learning to Construct Better Mutation Faults](./LEAM.pdf)." The 37th IEEE/ACM International Conference on Automated Software Engineering (ASE'22).
+*** 🏆 ACM SIGSOFT Distinguished Paper Award ***
+
 ## 1. Environment
+
 * Python 3.7
 * PyTorch 1.3
 * Defects4J V1.0
@@ -105,3 +111,10 @@ Please run `CUDA_VISIBLE_DEVICES=0,1 python3 testDefect4jV1Fixed.py Chart-1` in 
 
 --- ---
 
+
+
+
+#### (10) The influence of the number of mutation faults, which can be controlled by beam size, on mutation-based FL (Chart)
+<img src="./pictures/beamsizetcp.png" alt="drawing" width="800">
+
+--- ---
