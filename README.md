@@ -3,7 +3,8 @@
 LEAM adapts the syntax-guided encoder-decoder architecture by extending a set of grammar rules specific to our mutation task, to guarantee syntactic correctness of constructed mutation faults. It predicts the statements to be mutated under the context of the targeted method to reduce search space, and then predicts grammar rules for mutation fault construction based on both semantic and structural features in AST.
 
 See [Zhao Tian](https://tianzhaotju.github.io/), [Junjie Chen](https://sites.google.com/site/junjiechen08/), et al. "[Learning to Construct Better Mutation Faults](./LEAM.pdf)." The 37th IEEE/ACM International Conference on Automated Software Engineering (ASE'22).
-*** 🏆 ACM SIGSOFT Distinguished Paper Award ***
+
+ 🏆 ACM SIGSOFT Distinguished Paper Award 
 
 ## 1. Environment
 
