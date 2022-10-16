@@ -17,8 +17,8 @@ See [Zhao Tian](https://tianzhaotju.github.io/), [Junjie Chen](https://sites.goo
 
 ## 2. A Demo
 
-Pleas find our built model at: <https://huggingface.co/anonymoussss/leam/blob/main/best_model.ckpt>. Download the model and place it in folder `LEAM/checkpointSearch/`.
-
+Pleas find our built model at [this link](https://huggingface.co/anonymoussss/leam/blob/main/best_model.ckpt). Download the model and place it in folder `LEAM/checkpointSearch/`.
+(If you need, you can download the raw data from [this link](https://drive.google.com/drive/folders/1ECNX98qj9FMdRT2MXOUY6aQ6-sNT0b_a?usp=sharing).)
 We provide a demo to generate mutation faults for JFree Chart on fiexd version.
 
 Please run `CUDA_VISIBLE_DEVICES=0,1 python3 testDefect4jV1Fixed.py Chart-1` in the `LEAM/` folder directory. The generated mutation faults are saved as JSON in the `LEAM/mutants/` folder directory.
