@@ -116,6 +116,6 @@ Please run `CUDA_VISIBLE_DEVICES=0,1 python3 testDefect4jV1Fixed.py Chart-1` in 
 
 
 #### (10) The influence of the number of mutation faults, which can be controlled by beam size, on mutation-based FL (Chart)
-<img src="./pictures/beamsizetcp.png" alt="drawing" width="800">
+<img src="./pictures/beamsizefl.png" alt="drawing" width="800">
 
 --- ---
