@@ -119,3 +119,11 @@ Please run `CUDA_VISIBLE_DEVICES=0,1 python3 testDefect4jV1Fixed.py Chart-1` in 
 <img src="./pictures/beamsizefl.png" alt="drawing" width="800">
 
 --- ---
+
+## 4. Acknowledgement
+
+We are very grateful that the authors of TreeGen and Recoder make their code publicly available so that we can build this repository on top of their code.
+
+This work was partially supported by the National Natural Science Foundation of China Grant No. 62002256, and National Science Foundation under Grant Nos. CCF-2131943 and CCF-2141474.
+
+Feel free to contact Zhao Tian (tianzhao[AT]tju[DOT]edu[DOT]cn) and Junjie Chen (junjiechen[AT]tju[DOT]edu[DOT]cn) if you have any further questions.
