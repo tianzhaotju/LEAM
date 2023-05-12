@@ -27,13 +27,13 @@ class SumDataset(data.Dataset):
         self.Codes = []
         self.Nls = []
         self.num_step = 50
-        self.ruledict = pickle.load(open("rule4.pkl", "rb"))
+        self.ruledict = pickle.load(open("./data/rule4.pkl", "rb"))
         self.ruledict['start -> copyword2'] = len(self.ruledict)
         self.ruledict['start -> copyword3'] = len(self.ruledict)
         self.rrdict = {}
         for x in self.ruledict:
             self.rrdict[self.ruledict[x]] = x
-        if not os.path.exists("nl_voc.pkl"):
+        if not os.path.exists("./data/nl_voc.pkl"):
             self.init_dic()
         self.Load_Voc()
         if dataName == "train":
@@ -50,28 +50,26 @@ class SumDataset(data.Dataset):
                 return
             self.data = self.preProcessData(open(self.val_path, "r", encoding='utf-8'))
         else:
-            if os.path.exists("testdata.pkl"):
-                self.data = pickle.load(open("testdata.pkl", "rb"))
-                self.nl = pickle.load(open("testnl.pkl", "rb"))
+            if os.path.exists("./data/testdata.pkl"):
+                self.data = pickle.load(open("./data/testdata.pkl", "rb"))
+                self.nl = pickle.load(open("./data/testnl.pkl", "rb"))
                 return
             data = pickle.load(open('testcopy.pkl', 'rb'))
             self.data = self.preProcessData(data)
 
     def Load_Voc(self):
-        if os.path.exists("nl_voc.pkl"):
-            self.Nl_Voc = pickle.load(open("nl_voc.pkl", "rb"))
-        if os.path.exists("code_voc.pkl"):
-            self.Code_Voc = pickle.load(open("code_voc.pkl", "rb"))
+        if os.path.exists("./data/nl_voc.pkl"):
+            self.Nl_Voc = pickle.load(open("./data/nl_voc.pkl", "rb"))
+        if os.path.exists("./data/code_voc.pkl"):
+            self.Code_Voc = pickle.load(open("./data/code_voc.pkl", "rb"))
             self.Code_Voc['sta'] = len(self.Code_Voc)
-        if os.path.exists("char_voc.pkl"):
-            self.Char_Voc = pickle.load(open("char_voc.pkl", "rb"))
+        if os.path.exists("./data/char_voc.pkl"):
+            self.Char_Voc = pickle.load(open("./data/char_voc.pkl", "rb"))
         self.Nl_Voc["<emptynode>"] = len(self.Nl_Voc)
         self.Code_Voc["<emptynode>"] = len(self.Code_Voc)
 
     def init_dic(self):
         print("initVoc")
-        maxNlLen = 0
-        maxCodeLen = 0
         maxCharLen = 0
         nls = []
         data = pickle.load(open('process_datacopy.pkl', 'rb'))
@@ -99,9 +97,9 @@ class SumDataset(data.Dataset):
             for c in x:
                 if c not in self.Char_Voc:
                     self.Char_Voc[c] = len(self.Char_Voc)
-        open("nl_voc.pkl", "wb").write(pickle.dumps(self.Nl_Voc))
-        open("code_voc.pkl", "wb").write(pickle.dumps(self.Code_Voc))
-        open("char_voc.pkl", "wb").write(pickle.dumps(self.Char_Voc))
+        open("./data/nl_voc.pkl", "wb").write(pickle.dumps(self.Nl_Voc))
+        open("./data/code_voc.pkl", "wb").write(pickle.dumps(self.Code_Voc))
+        open("./data/char_voc.pkl", "wb").write(pickle.dumps(self.Char_Voc))
 
     def Get_Em(self, WordList, voc):
         ans = []
@@ -388,8 +386,8 @@ class SumDataset(data.Dataset):
             open("valdata.pkl", "wb").write(pickle.dumps(batchs, protocol=4))
             open("valnl.pkl", "wb").write(pickle.dumps(nls))
         if self.dataName == "test":
-            open("testdata.pkl", "wb").write(pickle.dumps(batchs))
-            open("testnl.pkl", "wb").write(pickle.dumps(self.nl))
+            open("./data/testdata.pkl", "wb").write(pickle.dumps(batchs))
+            open("./data/testnl.pkl", "wb").write(pickle.dumps(self.nl))
         
         return batchs
 

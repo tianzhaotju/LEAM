@@ -27,8 +27,37 @@ Please run `CUDA_VISIBLE_DEVICES=0,1 python3 testDefect4jV1Fixed.py Chart-1` in 
 (2) `Chart-1`: `project name` and `bug id`.
 
 
+## 3. Experiment Configuration
+#### (1) LEAM: The corresponding location files are provided under the `location2/` folder, which can help LEAM locate the function that needs to be mutated. You can easily follow the given example to design the location files for your mutated files. And you can use the default settings for the other hyper-parameters.
+#### (2) [Major](http://mutation-testing.org/): --DmutOp=tutorial.mml
+```angular2html
+tutorial.mml
 
-## 3. Experimental Results
+targetOp{
+    // Define the replacements for ROR
+    BIN(>)->{>=,!=,FALSE};
+    BIN(<)->{<=,!=,FALSE};
+    BIN(>=)->{>,==,TRUE};
+    BIN(<=)->{<,==,TRUE};
+    BIN(==)->{<=,>=,FALSE,LHS,RHS};
+    BIN(!=)->{<,>,TRUE,LHS,RHS};
+    // Define the replacements for COR
+    BIN(&&)->{==,LHS,RHS,FALSE};
+    BIN(||)->{!=,LHS,RHS,TRUE};
+    // Define the type of statement that STD should delete
+    DEL(RETURN);
+
+    // Enable the STD, COR, and ROR mutation operators
+    STD;
+    COR;
+    ROR;
+}
+// Call the defined operator group for the target method
+targetOp<"triangle.Triangle::classify(int,int,int)">;
+```
+#### (3) [PITest](https://pitest.org/): Version==1.7.4, --mutators=`<mutators><mutator>ALL</mutator></mutators>`
+
+## 4. Experimental Results
 
 ####  (1) Distribution of real faults by the number of involved statements
 <img src="./pictures/number.png" alt="drawing" width="800">

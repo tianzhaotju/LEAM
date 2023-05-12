@@ -1,7 +1,6 @@
 import torch.nn as nn
 import torch
 import math
-import torch.nn.functional as F
 
 
 class CombinationLayer(nn.Module):
@@ -17,5 +16,3 @@ class CombinationLayer(nn.Module):
             tmpsum = dropout(tmpsum)
         
         return tmpsum
-
-

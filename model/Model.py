@@ -3,17 +3,13 @@ import torch.nn.functional as F
 import torch
 from Transfomer import TransformerBlock
 from rightnTransfomer import rightTransformerBlock
-from Multihead_Combination import MultiHeadedCombination
 from Embedding import Embedding
-from TreeConvGen import TreeConvGen
-from Multihead_Attention import MultiHeadedAttention
 from gelu import GELU
 from LayerNorm import LayerNorm
 from decodeTrans import decodeTransformerBlock
 from gcnnnormal import GCNNM
 from postionEmbedding import PositionalEmbedding
 from graphTransformer import graphTransformerBlock
-import numpy as np
 
 
 class TreeAttEncoder(nn.Module):

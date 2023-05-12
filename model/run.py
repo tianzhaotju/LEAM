@@ -1,22 +1,19 @@
-import time
-from ast import arg
-from torch import optim
-from Dataset import SumDataset
 import os
-from tqdm import tqdm
-from Model import *
-import pickle
-from ScheduledOptim import *
-import sys
-from Searchnode import Node
-import json
-import traceback
 import re
-from stringfycode import stringfyRoot
-import javalang
+import sys
+import json
+import pickle
+import traceback
 import subprocess
-import signal
+import numpy as np
+from Model import *
+from tqdm import tqdm
+from torch import optim
 from copy import deepcopy
+from Searchnode import Node
+from ScheduledOptim import *
+from Dataset import SumDataset
+from stringfycode import stringfyRoot
 
 
 def getNodeByIdS(root, ido):
@@ -160,7 +157,7 @@ def evalacc(model, dev_set):
     tcard = []
     loss = []
     antimask2 = antimask.unsqueeze(0).repeat(args.batch_size, 1, 1).unsqueeze(1)
-    rulead = gVar(pickle.load(open("rulead.pkl", "rb"))).float().unsqueeze(0).repeat(4, 1, 1)
+    rulead = gVar(pickle.load(open("./data/rulead.pkl", "rb"))).float().unsqueeze(0).repeat(4, 1, 1)
     tmpindex = gVar(np.arange(len(dev_set.ruledict))).unsqueeze(0).repeat(4, 1).long()
     tmpchar = gVar(tmpast).unsqueeze(0).repeat(4, 1, 1).long()
     tmpindex2 = gVar(np.arange(len(dev_set.Code_Voc))).unsqueeze(0).repeat(4, 1).long()
@@ -192,7 +189,7 @@ def train():
     train_set = SumDataset(args, "train")
     datalen = len(train_set.data[0])
     datalen = int(datalen * 0.9)
-    rulead = gVar(pickle.load(open("rulead.pkl", "rb"))).float().unsqueeze(0).repeat(4, 1, 1)
+    rulead = gVar(pickle.load(open("./data/rulead.pkl", "rb"))).float().unsqueeze(0).repeat(4, 1, 1)
     args.cnum = rulead.size(1)
     tmpast = getAstPkl(train_set)
     a, b = getRulePkl(train_set)
@@ -495,7 +492,7 @@ def BeamSearch(inputnl, vds, model, beamsize, batch_size, k):
     a, b = getRulePkl(vds)
     tmpf = gVar(a).unsqueeze(0).repeat(2, 1).long()
     tmpc = gVar(b).unsqueeze(0).repeat(2, 1, 1).long()
-    rulead = gVar(pickle.load(open("rulead.pkl", "rb"))).float().unsqueeze(0).repeat(2, 1, 1)
+    rulead = gVar(pickle.load(open("./data/rulead.pkl", "rb"))).float().unsqueeze(0).repeat(2, 1, 1)
     tmpindex = gVar(np.arange(len(vds.ruledict))).unsqueeze(0).repeat(2, 1).long()
     tmpchar = gVar(tmpast).unsqueeze(0).repeat(2, 1, 1).long()
     tmpindex2 = gVar(np.arange(len(vds.Code_Voc))).unsqueeze(0).repeat(2, 1).long()
@@ -629,7 +626,7 @@ def BeamSearch(inputnl, vds, model, beamsize, batch_size, k):
 
 def test():
     dev_set = SumDataset(args, "test")
-    rulead = gVar(pickle.load(open("rulead.pkl", "rb"))).float().unsqueeze(0).repeat(2, 1, 1)
+    rulead = gVar(pickle.load(open("./data/rulead.pkl", "rb"))).float().unsqueeze(0).repeat(2, 1, 1)
     args.cnum = rulead.size(1)
     args.Nl_Vocsize = len(dev_set.Nl_Voc)
     args.Code_Vocsize = len(dev_set.Code_Voc)
@@ -1113,7 +1110,7 @@ def solveone(data, model, bugid, version):
         if indexs < 0:
             indexs += 1
             continue
-        ans = BeamSearch((x[0], x[1], None, None, None, None, None, None, x[2], x[3]), dev_set, model, 64, args.batch_size, indexs)
+        ans = BeamSearch((x[0], x[1], None, None, None, None, None, None, x[2], x[3]), dev_set, model, 128, args.batch_size, indexs)
         savedata_one = []
         for i in range(len(ans)):
             currid = indexs * args.batch_size + i
@@ -1122,7 +1119,7 @@ def solveone(data, model, bugid, version):
                 classcontent = json.load(open("result/%s.json" % idss, 'r'))
             else:
                 classcontent = []
-            classcontent.extend(json.load(open("temp.json", 'r')))
+            classcontent.extend(json.load(open("./data/temp.json", 'r')))
             rrdicts = {}
             for x in classcontent:
                 rrdicts[x['filename']] = x
@@ -1229,7 +1226,24 @@ def solveone(data, model, bugid, version):
                 if code is None:
                     continue
                 mutant['code'] = code
-            savedata.append(mutant)
+
+            filepath2 = 'fixed' + mutant['filename'][5:]
+            oricode = open(filepath2, "r").read()
+            open(filepath2, "w").write(code)
+            cmd = 'defects4j compile -w fixed/'
+            try:
+                log = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, bufsize=-1, start_new_session=True).communicate()
+                if len(log) > 1 and log[1].decode('utf-8') == 'Running ant (compile)...................................................... OK\nRunning ant (compile.tests)................................................ OK\n':
+                    mutant['compile'] = True
+                    savedata.append(mutant)
+                else:
+                    mutant['compile'] = False
+                open(filepath2, "w").write(oricode)
+            except Exception as e:
+                mutant['compile'] = False
+                open(filepath2, "w").write(oricode)
+                continue
+        print(len(savedata))
         indexs += 1
     savedata = sorted(savedata, key=lambda x: x['prob'], reverse=True)
     open('mutants/%s.json' % data[0]['idss'], 'w').write(json.dumps(savedata, indent=4))

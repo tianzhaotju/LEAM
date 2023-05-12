@@ -4,7 +4,6 @@ from SubLayerConnection import SublayerConnection
 from DenseLayer import DenseLayer
 from ConvolutionForward import ConvolutionLayer
 from Multihead_Combination import MultiHeadedCombination
-from TreeConv import TreeConv
 from gcnn import GCNN
 
 

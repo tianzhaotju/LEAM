@@ -1,7 +1,4 @@
-import sys
-import torch
 import torch.utils.data as data
-import random
 import pickle
 import os
 from nltk import word_tokenize

@@ -1,10 +1,13 @@
+import sys
+sys.path.append('./')
+sys.path.append('./model')
 import javalang
-from run import *
-from stringfycode import stringfyRoot
+from model.run import *
 import time
 import subprocess
-from Searchnode import Node
-import sys
+from model.Searchnode import Node
+# from model import sys
+
 linenode = ['Statement_ter', 'BreakStatement_ter', 'ReturnStatement_ter', 'ContinueStatement', 'ContinueStatement_ter', 'LocalVariableDeclaration', 'condition', 'control', 'BreakStatement', 'ContinueStatement', 'ReturnStatement', "parameters", 'StatementExpression', 'return_type']
 
 
@@ -454,4 +457,3 @@ for i, xss in enumerate(prlist):
             data.append({'code':liness, 'treeroot':treeroot, 'troot':troot, 'oldcode':oldcode, 'filepath':filepath, 'subroot':subroot, 'vardic':vardic, 'typedic':typedic, 'idss':idss, 'classname':classname, 'precode':precode, 'aftercode':aftercode, 'tree':troot.printTreeWithVar(troot, vardic), 'prob':troot.getTreeProb(troot), 'mode':0, 'line':lineid, 'isa':False})
         print(len(data))
         solveone(data, model, bugid, 'fixed')
-
