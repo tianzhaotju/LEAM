@@ -2,7 +2,7 @@
 
 LEAM adapts the syntax-guided encoder-decoder architecture by extending a set of grammar rules specific to our mutation task, to guarantee syntactic correctness of constructed mutation faults. It predicts the statements to be mutated under the context of the targeted method to reduce search space, and then predicts grammar rules for mutation fault construction based on both semantic and structural features in AST.
 
-See [Zhao Tian](https://tianzhaotju.github.io/), [Junjie Chen](https://sites.google.com/site/junjiechen08/), et al. "[Learning to Construct Better Mutation Faults](./LEAM.pdf)." The 37th IEEE/ACM International Conference on Automated Software Engineering (ASE'22).
+See [Zhao Tian](https://tianzhaotju.github.io/), [Junjie Chen](https://sites.google.com/site/junjiechen08/), et al. "[Learning to Construct Better Mutation Faults](https://lingming.cs.illinois.edu/publications/ase2022.pdf)." The 37th IEEE/ACM International Conference on Automated Software Engineering (ASE'22).
 
  🏆 ACM SIGSOFT Distinguished Paper Award 
 
@@ -21,7 +21,7 @@ Pleas find our built model at [this link](https://huggingface.co/anonymoussss/le
 (If you need, you can download the raw data from [this link](https://drive.google.com/drive/folders/1ECNX98qj9FMdRT2MXOUY6aQ6-sNT0b_a?usp=sharing).)
 We provide a demo to generate mutation faults for JFree Chart on fiexd version.
 
-Please run `CUDA_VISIBLE_DEVICES=0,1 python3 testDefect4jV1Fixed.py Chart-1` in the `LEAM/` folder directory. The generated mutation faults are saved as JSON in the `LEAM/mutants/` folder directory.
+Please run `CUDA_VISIBLE_DEVICES=0,1 python3 test.py Chart-1` in the `LEAM/` folder directory. The generated mutation faults are saved as JSON in the `LEAM/mutants/` folder directory.
 
 (1) `CUDA_VISIBLE_DEVICES=0,1`: specify two available GPUs.
 (2) `Chart-1`: `project name` and `bug id`.
@@ -152,7 +152,3 @@ targetOp<"triangle.Triangle::classify(int,int,int)">;
 ## 4. Acknowledgement
 
 We are very grateful that the authors of TreeGen and Recoder make their code publicly available so that we can build this repository on top of their code.
-
-This work was partially supported by the National Natural Science Foundation of China Grant No. 62002256, and National Science Foundation under Grant Nos. CCF-2131943 and CCF-2141474.
-
-Feel free to contact Zhao Tian (tianzhao[AT]tju[DOT]edu[DOT]cn) and Junjie Chen (junjiechen[AT]tju[DOT]edu[DOT]cn) if you have any further questions.

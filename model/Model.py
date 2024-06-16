@@ -1,14 +1,14 @@
-import torch.nn as nn
-import torch.nn.functional as F
 import torch
-from Transfomer import TransformerBlock
-from rightnTransfomer import rightTransformerBlock
-from Embedding import Embedding
 from gelu import GELU
-from LayerNorm import LayerNorm
-from decodeTrans import decodeTransformerBlock
+import torch.nn as nn
 from gcnnnormal import GCNNM
+import torch.nn.functional as F
+from Embedding import Embedding
+from LayerNorm import LayerNorm
+from Transfomer import TransformerBlock
+from decodeTrans import decodeTransformerBlock
 from postionEmbedding import PositionalEmbedding
+from rightnTransfomer import rightTransformerBlock
 from graphTransformer import graphTransformerBlock
 
 

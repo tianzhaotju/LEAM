@@ -1,12 +1,12 @@
 import sys
 sys.path.append('./')
 sys.path.append('./model')
-import javalang
-from model.run import *
 import time
+import javalang
 import subprocess
+from model.run import *
 from model.Searchnode import Node
-# from model import sys
+
 
 linenode = ['Statement_ter', 'BreakStatement_ter', 'ReturnStatement_ter', 'ContinueStatement', 'ContinueStatement_ter', 'LocalVariableDeclaration', 'condition', 'control', 'BreakStatement', 'ContinueStatement', 'ReturnStatement', "parameters", 'StatementExpression', 'return_type']
 
@@ -116,7 +116,6 @@ def solveLongTree(root, subroot):
             t = -1
             for s in x[1].child:
                 if s.name == 'type' and t == -1:
-                    print(s.printTree(s))
                     if len(s.child[0].child) > 1:
                         try:
                             t = s.child[0].child[1].child[0].child[0].child[0].name[:-4]
@@ -277,7 +276,6 @@ def generateAST(tree):
                 sub.append(str(node))
                 sub.append("^")
             else:
-                print(type(node))
                 assert(0)
             sub.append("^")
     except AttributeError:
@@ -345,7 +343,6 @@ def isAssign(line):
             v = anode.child[1].child[0].child[0].child[0].name
         except:
             return False
-        print(m, v)
         return m == v
     if anode.child[0].child[0].name == 'MemberReference':
         try:
@@ -370,7 +367,6 @@ for i, xss in enumerate(prlist):
         timecurr = time.time()
         x = xss
         locationdir = 'location2/%s/%d/parsed_ochiai_result' % (x, idx)
-        print(locationdir)
         methodvisit = {}
         if not os.path.exists(locationdir):
             continue
@@ -410,7 +406,6 @@ for i, xss in enumerate(prlist):
             currroot = getNodeById(tmproot, lineid)
             lnode, mnode = getSubroot(currroot)
             if mnode is None:
-                print(1)
                 continue
             tree = mnode.printTree(mnode)
             if tree not in methodvisit:
@@ -425,7 +420,6 @@ for i, xss in enumerate(prlist):
             aftersubroot = None
             linenodes = getLineNode(treeroot, "")
             if subroot not in linenodes:
-                print(2)
                 continue
             currid = linenodes.index(subroot)
             if currid > 0:
@@ -435,7 +429,6 @@ for i, xss in enumerate(prlist):
             setProb(treeroot, 2)
             addter(treeroot)
             if subroot is None:
-                print(3)
                 continue
             setProb(treeroot, 2)
             if subroot is not None:
@@ -445,8 +438,7 @@ for i, xss in enumerate(prlist):
             if presubroot is not None:
                 setProb(presubroot, 1)
             cid = set(containID(subroot))
-            maxl = -1
-            minl = 1e10
+            minl, maxl = 1e10, -1
             for l in cid:
                 maxl = max(maxl, l - 1)
                 minl = min(minl, l - 1)
@@ -455,5 +447,4 @@ for i, xss in enumerate(prlist):
             oldcode = "\n".join(liness[minl:maxl + 1])
             troot, vardic, typedic = solveLongTree(treeroot, subroot)
             data.append({'code':liness, 'treeroot':treeroot, 'troot':troot, 'oldcode':oldcode, 'filepath':filepath, 'subroot':subroot, 'vardic':vardic, 'typedic':typedic, 'idss':idss, 'classname':classname, 'precode':precode, 'aftercode':aftercode, 'tree':troot.printTreeWithVar(troot, vardic), 'prob':troot.getTreeProb(troot), 'mode':0, 'line':lineid, 'isa':False})
-        print(len(data))
         solveone(data, model, bugid, 'fixed')

@@ -16,6 +16,19 @@ from Dataset import SumDataset
 from stringfycode import stringfyRoot
 
 
+use_cuda = False
+if torch.cuda.is_available():
+    use_cuda = True
+args = dotdict({'NlLen': 500, 'CodeLen': 60, 'batch_size': 16, 'embedding_size': 256, 'WoLen': 15, 'Vocsize': 100,
+                'Nl_Vocsize': 100, 'max_step': 3, 'margin': 0.5, 'poolsize': 50, 'Code_Vocsize': 100, 'num_steps': 50,
+                'rulenum': 10, 'cnum': 695})
+onelist = ['sta', 'root', 'body', 'statements', 'block', 'arguments', 'initializers', 'parameters', 'case', 'cases',
+           'selectors']
+linenode = ['Statement_ter', 'BreakStatement_ter', 'ReturnStatement_ter', 'ContinueStatement', 'ContinueStatement_ter',
+            'LocalVariableDeclaration', 'condition', 'control', 'BreakStatement', 'ContinueStatement',
+            'ReturnStatement', "parameters", 'StatementExpression', 'return_type']
+
+
 def getNodeByIdS(root, ido):
     if root.id == ido:
         return root
@@ -37,31 +50,6 @@ def myHandler2(signum, frame):
 class dotdict(dict):
     def __getattr__(self, name):
         return self[name]
-
-
-args = dotdict({
-    'NlLen': 500,
-    'CodeLen': 60,
-    'batch_size': 16,
-    'embedding_size': 256,
-    'WoLen': 15,
-    'Vocsize': 100,
-    'Nl_Vocsize': 100,
-    'max_step': 3,
-    'margin': 0.5,
-    'poolsize': 50,
-    'Code_Vocsize': 100,
-    'num_steps': 50,
-    'rulenum': 10,
-    'cnum': 695
-})
-use_cuda = False
-if torch.cuda.is_available():
-    use_cuda = True
-onelist = ['sta', 'root', 'body', 'statements', 'block', 'arguments', 'initializers', 'parameters', 'case', 'cases', 'selectors']
-linenode = ['Statement_ter', 'BreakStatement_ter', 'ReturnStatement_ter', 'ContinueStatement', 'ContinueStatement_ter',
-            'LocalVariableDeclaration', 'condition', 'control', 'BreakStatement', 'ContinueStatement',
-            'ReturnStatement', "parameters", 'StatementExpression', 'return_type']
 
 
 def getroottree2(tokens, isex=False):
@@ -214,15 +202,12 @@ def train():
     maxC2 = 0
     maxL = 1e10
     if use_cuda:
-        print('using GPU')
         model = model.cuda()
         model = nn.DataParallel(model, device_ids=[0, 1])
     load_model(model)
-    print('load model')
     antimask = gVar(getAntiMask(args.CodeLen))
     for epoch in range(10000):
         j = 0
-        print('epoch', epoch)
         for dBatch in tqdm(data_loader):
             if j % 1000 == 10:
                 acc2, tnum2, l = evalacc(model, test_set)
@@ -480,9 +465,6 @@ class SearchNode:
         return self.printTree(self.root)
 
 
-beamss = []
-
-
 def BeamSearch(inputnl, vds, model, beamsize, batch_size, k):
     batch_size = len(inputnl[0].view(-1, args.NlLen))
     rrdic = {}
@@ -632,20 +614,17 @@ def test():
     args.Code_Vocsize = len(dev_set.Code_Voc)
     args.Vocsize = len(dev_set.Char_Voc)
     args.rulenum = len(dev_set.ruledict) + args.NlLen
-    print(dev_set.rrdict[152])
     args.batch_size = 12
     rdic = {}
     for x in dev_set.Nl_Voc:
         rdic[dev_set.Nl_Voc[x]] = x
     model = Decoder(args)
     if torch.cuda.is_available():
-        print('using GPU')
         model = model.cuda()
         model = nn.DataParallel(model, device_ids=[0, 1])
     load_model(model)
     model = model.eval()
-    print('Load end.')
-    
+
     return model
 
 
@@ -1173,8 +1152,6 @@ def solveone(data, model, bugid, version):
                     else:
                         flagturn = True
                         precodes.append("\n")
-                        print(len(liness))
-                        print(minl2)
                         precodes.append("\n".join(liness[0:minl2]))
                         oldcodes.append("\n".join(liness[minl1:maxl1 + 1]))
                         oldcodes.append("\n".join(liness[minl2:maxl2 + 1]))
@@ -1243,7 +1220,6 @@ def solveone(data, model, bugid, version):
                 mutant['compile'] = False
                 open(filepath2, "w").write(oricode)
                 continue
-        print(len(savedata))
         indexs += 1
     savedata = sorted(savedata, key=lambda x: x['prob'], reverse=True)
     open('mutants/%s.json' % data[0]['idss'], 'w').write(json.dumps(savedata, indent=4))
